@@ -1,28 +1,17 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-		<title>Untitled Document</title>
-	</head>
-	<body>
-		<% form_for :dump, :url=>{:controller=>"stats", :action=>"import"}, :html => { :multipart => true } do |f| -%>
-		 <table">
-		   <tr>
-		     <td>
-		      <label for="dump_file">
-		        Select UI Stats Log File :
-		      </label>
-		     </td>
-		     <td >
-		       <%= f.file_field :file -%>
-		     </td>
-		   </tr>
-		   <tr>
-		     <td colspan='2'>
-		       <%= submit_tag 'Submit' -%>
-		     </td>
-		   </tr>
-		 </table>
-		<% end -%>
-	</body>
-</html>
+<% form_for :dump, :url=>{:controller=>"stats", :action=>"import"}, :html => { :multipart => true } do |f| -%>
+   <tr>
+     <td>
+      <label for="dump_file">
+        Select UI Stats Log File :
+      </label>
+     </td>
+     <td >
+       <%= f.file_field :file -%>
+     </td>
+   </tr>
+   <tr>
+     <td colspan='2'>
+       <%= submit_tag 'Submit' -%>
+     </td>
+   </tr>
+<% end -%>

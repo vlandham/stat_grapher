@@ -1,0 +1,22 @@
+#menu {
+	padding-top: 10px;
+}
+
+#header {
+	padding-bottom: 20px;
+}
+
+#header img {
+	border-style: none;
+}
+
+#flash-notice {
+
+	font-size: 1.5em;
+	text-align: center;
+	margin: auto;
+	background-color: #24526D;
+	color: #ffffff;
+	padding-bottom: 10px;
+	padding-top: 10px;	
+}

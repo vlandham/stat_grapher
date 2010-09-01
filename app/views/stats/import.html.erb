@@ -1,10 +1,9 @@
 
-<% @pages.each_with_index do |page, index| %>
+<div id="menu">
+	<%= link_to "Graph Another!", stats_url, :class => "sexybutton sexysimple sexyxl" %>
+</div>
 
-<script type="text/javascript">
-	var example = 'pie-basic',
-	theme = 'grid'
-</script>
+<% @pages.each_with_index do |page, index| %>
 <script type="text/javascript" charset="utf-8">
   $(function() {
     new Highcharts.Chart({
@@ -56,10 +55,8 @@
 	  	type: 'pie',
 		data: [
 				<% page.button_percentages.each do |button, percent| %>
-					["<%= button.to_s[0..20] %>", <%= percent %> ],
-				
-				<% end %>
-		
+					["<%= button.to_s[0..20] %>", <%= percent %> ],				
+				<% end %>		
 		      ]
  
         

@@ -16,6 +16,12 @@ class StatsController < ApplicationController
   def import
     manager = PageManager.new
     
+    if !params || !params[:dump] || !params[:dump][:file]
+      flash[:notice] = "We need a Stats File Stat!"
+      redirect_to stats_url
+      return
+    end
+    
     params[:dump][:file].each { |line|
         
         parts = line.split(';')

@@ -1,11 +1,20 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<%= javascript_include_tag "jquery", "highcharts" %>
+		<title>Stat Grapher</title>
+		<%= stylesheet_link_tag "application", "sexybuttons" %>
+		<%= javascript_include_tag "jquery", "highcharts" %>		
 		
 		<%= yield(:head) %>
 	</head>
 	<body>
+		<div id="header">
+			<%= link_to image_tag("logo.png"), stats_url %>
+			<% if !flash.empty? %>
+				<div id="flash-notice"><%= flash[:notice] %></div>
+			<%end%>
+		</div>
+		
 		<div id="container">
 			<%= yield %>
 		</div>
