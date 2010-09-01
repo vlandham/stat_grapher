@@ -3,6 +3,8 @@
 	<%= link_to "Graph Another!", stats_url, :class => "sexybutton sexysimple sexyxl" %>
 </div>
 
+<h2 class="title">Top 10 Clicked on Pages</h2>
+
 <% @pages.each_with_index do |page, index| %>
 <script type="text/javascript" charset="utf-8">
   $(function() {
@@ -12,7 +14,12 @@
 		margin: [50, 200, 60, 170]
       },
       title: {
-        text: "<%= page.name %> :: Total Clicks: <%= page.total_clicks %>"
+        text: "<%= page.name %>  - <%= page.total_clicks %> clicks",
+		style: {
+			
+			color: '#8C2318',
+			fontSize: '22px'
+		}
       },
 		plotArea: {
 			shadow: null,
@@ -65,7 +72,10 @@
     });
   });
 </script>
+
 <div id="page_chart_<%=index %>" style="height:510px; width:900px; margin:0 auto; clear:both;"></div>
+
+<div class="chart_bottom"></div>
 <% break if index > 10 %>
 
 <% end %>

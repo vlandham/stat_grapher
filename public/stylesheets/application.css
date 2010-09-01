@@ -10,6 +10,25 @@
 	border-style: none;
 }
 
+#container {
+	margin: auto;
+	width: 900px;
+}
+
+.title {
+	margin: auto;
+	text-align: center;
+	padding-bottom: 20px;
+	color: #24526D;
+}
+
+.chart_bottom {
+	height: 10px;
+	width: 100%;
+	background-color: #8e8e8e;
+	margin-bottom: 15px;
+}
+
 #flash-notice {
 
 	font-size: 1.5em;
