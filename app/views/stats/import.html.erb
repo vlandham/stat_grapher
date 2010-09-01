@@ -3,7 +3,7 @@
 	<%= link_to "Graph Another!", stats_url, :class => "sexybutton sexysimple sexyxl" %>
 </div>
 
-<h2 class="title">Top 10 Clicked on Pages</h2>
+<h2 class="title">Top <%= @page_number %> Clicked on Pages</h2>
 
 <% @pages.each_with_index do |page, index| %>
 <script type="text/javascript" charset="utf-8">
@@ -76,6 +76,5 @@
 <div id="page_chart_<%=index %>" style="height:510px; width:900px; margin:0 auto; clear:both;"></div>
 
 <div class="chart_bottom"></div>
-<% break if index > 10 %>
 
 <% end %>

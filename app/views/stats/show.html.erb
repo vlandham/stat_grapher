@@ -1,17 +1,18 @@
 <% form_for :dump, :url=>{:controller=>"stats", :action=>"import"}, :html => { :multipart => true } do |f| -%>
-   <tr>
-     <td>
-      <label for="dump_file">
-        Select UI Stats Log File :
-      </label>
-     </td>
-     <td >
-       <%= f.file_field :file -%>
-     </td>
-   </tr>
-   <tr>
-     <td colspan='2'>
-       <%= submit_tag 'Submit' -%>
-     </td>
-   </tr>
+
+	<label for="dump_file">
+		Select UI Stats Log File :
+	</label>
+
+	<%= f.file_field :file -%>
+	<%= submit_tag 'Submit' -%>
+	
+	<br /> 
+	<br />
+	<label for="dump_number">
+		How many Pages do you want to Graph?
+	</label>
+	
+	<%= f.select :page_number, [25,50,100,200] %>
+  
 <% end -%>

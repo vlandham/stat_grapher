@@ -13,11 +13,25 @@ class Page
   end
   
   def add( button_name, click_time=0 )
+    button_name = clean_button_name(button_name)
+    if( check_name(button_name))
+      @buttons[button_name] += 1
+      @total_clicks += 1
+    end
+  end
+  
+  def clean_button_name(button_name)
       button_name = button_name.gsub(/_PORT$/,"")
       button_name = button_name.gsub(/^STOCK_/,"")
       button_name = button_name.gsub(/^STR_/, "")
-      @buttons[button_name] += 1
-      @total_clicks += 1
+      if button_name =~ /03bc/
+        button_name = "Map?"
+      end
+      button_name
+  end
+  
+  def check_name(button_name)
+    button_name != "00000000" # don't know what this is
   end
   
   def total_clicks

@@ -29,8 +29,9 @@ class StatsController < ApplicationController
             manager.add( parts[3], parts[2], parts[0] ) if parts[3] && !parts[3].empty?
         end
     }
-    @pages = manager.sorted_pages
+    @page_number = params[:dump][:page_number].to_i || 25
     
+    @pages = manager.sorted_pages[0, @page_number]
 
     respond_to do |format|
       format.html
