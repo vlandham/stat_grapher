@@ -1,5 +1,5 @@
 set :application, "stat_grapher"
-set :repository,  "ssh://doxygen.garmin.com/opt/git/stat_grapher"
+set :repository,  "ssh://doxygen.garmin.com/opt/git/#{application}"
 set :deploy_to, "/opt/rails_apps/#{application}"
 set :use_sudo, false
 set :user, "vallandingham"
