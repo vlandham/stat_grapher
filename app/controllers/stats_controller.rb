@@ -14,7 +14,7 @@ class StatsController < ApplicationController
   end
   
   def import
-    manager = PageManager.new
+    page_manager = PageManager.new
     
     if !params || !params[:dump] || !params[:dump][:file]
       flash[:notice] = "We need a Stats File Stat!"
@@ -22,16 +22,15 @@ class StatsController < ApplicationController
       return
     end
     
-    params[:dump][:file].each { |line|
-        
+    params[:dump][:file].each { |line|        
         parts = line.split(';')
         if parts[1] =~ /CLST/
-            manager.add( parts[3], parts[2], parts[0] ) if parts[3] && !parts[3].empty?
+            page_manager.add( parts[3], parts[2], parts[0] ) if parts[3] && !parts[3].empty?
         end
     }
     @page_number = params[:dump][:page_number].to_i || 25
     
-    @pages = manager.sorted_pages[0, @page_number]
+    @pages = page_manager.sorted_pages[0, @page_number]
 
     respond_to do |format|
       format.html
