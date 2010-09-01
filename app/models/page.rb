@@ -51,7 +51,7 @@ class Page
     percentages = {}
     clicks = total_clicks.to_f
     @buttons.each do |button, count|
-      percentages[button] = ( (count.to_f / clicks) * 100.0 ).round
+      percentages[button] = (( (count.to_f / clicks) * 100.0 ) * 100 ).round.to_f / 100
     end
     percentages
   end
