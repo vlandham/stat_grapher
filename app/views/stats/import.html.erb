@@ -1,0 +1,74 @@
+
+<% @pages.each_with_index do |page, index| %>
+
+<script type="text/javascript">
+	var example = 'pie-basic',
+	theme = 'grid'
+</script>
+<script type="text/javascript" charset="utf-8">
+  $(function() {
+    new Highcharts.Chart({
+      chart: {
+        renderTo: "page_chart_<%= index %>",
+		margin: [50, 200, 60, 170]
+      },
+      title: {
+        text: "<%= page.name %> :: Total Clicks: <%= page.total_clicks %>"
+      },
+		plotArea: {
+			shadow: null,
+			borderWidth: null,
+			backgroundColor: null
+		},
+ 		plotOptions: {
+			pie: {
+				allowPointSelect: true,
+				cursor: 'pointer',
+				dataLabels: {
+					enabled: true,
+					formatter: function() {
+						if (this.y > 5) return this.point.name;
+					},
+					color: 'white',
+					style: {
+						font: '12px Trebuchet MS, Verdana, sans-serif'
+					}
+				}
+			}
+		},
+ 	tooltip: {
+		formatter: function() {
+			return '<b> ' + this.point.name +'</b>: '+ this.y+' %';
+		}
+      },
+	legend: {
+		layout: 'vertical',
+		align: 'right',
+		style: {
+			left: 'auto',
+			bottom: 'auto',
+			right: '30px',
+			top: '100px'
+		}
+	},  
+      series: [
+      {
+	  	type: 'pie',
+		data: [
+				<% page.button_percentages.each do |button, percent| %>
+					["<%= button.to_s[0..20] %>", <%= percent %> ],
+				
+				<% end %>
+		
+		      ]
+ 
+        
+      },
+      ]
+    });
+  });
+</script>
+<div id="page_chart_<%=index %>" style="height:510px; width:900px; margin:0 auto; clear:both;"></div>
+<% break if index > 10 %>
+
+<% end %>

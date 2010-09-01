@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<%= javascript_include_tag "jquery", "highcharts" %>
+		
+		<%= yield(:head) %>
+	</head>
+	<body>
+		<div id="container">
+			<%= yield %>
+		</div>
+	</body>
+</html>
