@@ -3,74 +3,89 @@
 	<%= link_to "Graph Another!", stats_url, :class => "sexybutton sexysimple sexyxl" %>
 </div>
 
-<h2 class="title">Top <%= @page_number %> Clicked on Pages</h2>
+<div class="clearfix"></div>
 
-<% @pages.each_with_index do |page, index| -%>
-	<script type="text/javascript" charset="utf-8">
-	  $(function() {
-	    new Highcharts.Chart({
-	      chart: {
-	        renderTo: "page_chart_<%= index %>",
-			margin: [50, 200, 60, 170]
-	      },
-	      title: {
-	        text: "<%= page.name %>  - <%= page.total_clicks %> clicks",
-			style: {
-				
-				color: '#8C2318',
-				fontSize: '22px'
-			}
-	      },
-			plotArea: {
-				shadow: null,
-				borderWidth: null,
-				backgroundColor: null
-			},
-	 		plotOptions: {
-				pie: {
-					allowPointSelect: true,
-					cursor: 'pointer',
-					dataLabels: {
-						enabled: true,
-						formatter: function() {
-							if (this.y > 5) return this.point.name;
-						},
-						color: 'white',
-						style: {
-							font: '12px Trebuchet MS, Verdana, sans-serif'
+<ul class="tabs">
+	<li><a href="#all">All</a></li>
+	<li><a href="#pages">Pages</a></li>
+</ul>
+
+<div class="panes">
+	<div>
+		<%= render "all_pages", :object => @pages, :locals => {:page_number => @page_number, :other_pages => @other_pages } %>
+	</div>
+		
+	<div>
+	<h2 class="title">Top <%= @page_number %> Clicked on Pages</h2>
+	
+	<% @pages.each_with_index do |page, index| -%>
+		<script type="text/javascript" charset="utf-8">
+		  $(function() {
+		    new Highcharts.Chart({
+		      chart: {
+		        renderTo: "page_chart_<%= index %>",
+				margin: [50, 200, 60, 170]
+		      },
+		      title: {
+		        text: "<%= page.name %>  - <%= page.total_clicks %> clicks",
+				style: {
+					
+					color: '#8C2318',
+					fontSize: '22px'
+				}
+		      },
+				plotArea: {
+					shadow: null,
+					borderWidth: null,
+					backgroundColor: null
+				},
+		 		plotOptions: {
+					pie: {
+						allowPointSelect: true,
+						cursor: 'pointer',
+						dataLabels: {
+							enabled: true,
+							formatter: function() {
+								if (this.y > 5) return this.point.name;
+							},
+							color: 'white',
+							style: {
+								font: '12px Trebuchet MS, Verdana, sans-serif'
+							}
 						}
 					}
+				},
+		 	tooltip: {
+				formatter: function() {
+					return '<b> ' + this.point.name +'</b>: '+ this.y+' %';
 				}
-			},
-	 	tooltip: {
-			formatter: function() {
-				return '<b> ' + this.point.name +'</b>: '+ this.y+' %';
-			}
-	      },
-		legend: {
-			layout: 'vertical',
-			align: 'right',
-			style: {
-				left: 'auto',
-				bottom: 'auto',
-				right: '30px',
-				top: '100px'
-			}
-		},  
-	      series: [{
-		  	type: 'pie',
-			data: [
-					<% page.button_percentages.each do |button, percent| -%>
-						["<%= button.to_s[0..20] %>", <%= percent -%> ],				
-					<% end -%>		
-			      ]       
-	      }]
-	    });
-	  });
-	</script>
-
-	<div id="page_chart_<%=index %>" style="height:510px; width:900px; margin:0 auto; clear:both;"></div>
-
-	<div class="chart_bottom"></div>
-
-<% end -%>
+		      },
+			legend: {
+				layout: 'vertical',
+				align: 'right',
+				style: {
+					left: 'auto',
+					bottom: 'auto',
+					right: '30px',
+					top: '100px'
+				}
+			},  
+		      series: [{
+			  	type: 'pie',
+				data: [
+						<% page.button_percentages.each do |button, percent| -%>
+							["<%= button.to_s[0..20] %>", <%= percent -%> ],				
+						<% end -%>		
+				      ]       
+		      }]
+		    });
+		  });
+		</script>
+	
+		<div id="page_chart_<%=index %>" style="height:510px; width:900px; margin:0 auto; clear:both;"></div>
+	
+		<div class="chart_bottom"></div>
+	
+	<% end -%>
+	</div>
+</div>

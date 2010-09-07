@@ -12,22 +12,16 @@ class Page
       @buttons.size
   end
   
-  def add( button_name, click_time=0 )
-    button_name = clean_button_name(button_name)
+  def add( button_name, click_time, page_name )
+    button_name = clean_button_name(button_name, page_name)
     if( check_name(button_name))
       @buttons[button_name] += 1
       @total_clicks += 1
     end
   end
   
-  def clean_button_name(button_name)
-      button_name = button_name.gsub(/_PORT$/,"")
-      button_name = button_name.gsub(/^STOCK_/,"")
-      button_name = button_name.gsub(/^STR_/, "")
-      if button_name =~ /03bc/
-        button_name = "Map?"
-      end
-      button_name
+  def clean_button_name(button_name, page_name)
+      ButtonNameSubstitutions.sub( button_name, page_name )
   end
   
   def check_name(button_name)
@@ -53,7 +47,7 @@ class Page
     @buttons.each do |button, count|
       percentages[button] = (( (count.to_f / clicks) * 100.0 ) * 100 ).round.to_f / 100
     end
-    percentages
+    percentages.sort {|a,b| b[1] <=> a[1]}
   end
   
  # def eql?(o)

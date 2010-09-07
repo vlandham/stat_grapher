@@ -1,0 +1,67 @@
+<h2 class="title">Top <%= @page_number %> Clicked on Pages</h2>
+
+<script type="text/javascript" charset="utf-8">
+  $(function() {
+    new Highcharts.Chart({
+      chart: {
+        renderTo: "all_pages_chart",
+		margin: [50, 200, 60, 170]
+      },
+      title: {
+        text: "",
+		style: {
+			
+			color: '#8C2318',
+			fontSize: '22px'
+		}
+      },
+		plotArea: {
+			shadow: null,
+			borderWidth: null,
+			backgroundColor: null
+		},
+ 		plotOptions: {
+			pie: {
+				allowPointSelect: true,
+				cursor: 'pointer',
+				dataLabels: {
+					enabled: true,
+					formatter: function() {
+						if (this.y > 5) return this.point.name;
+					},
+					color: 'white',
+					style: {
+						font: '12px Trebuchet MS, Verdana, sans-serif'
+					}
+				}
+			}
+		},
+ 	tooltip: {
+		formatter: function() {
+			return '<b> ' + this.point.name +'</b>: '+ this.y;
+		}
+      },
+	legend: {
+		layout: 'vertical',
+		align: 'right',
+		style: {
+			left: 'auto',
+			bottom: 'auto',
+			right: '30px',
+			top: '100px'
+		}
+	},  
+      series: [{
+	  	type: 'pie',
+		data: [
+				<% all_pages.each do |page| -%>
+					["<%= page.name.gsub('Page','').to_s[0..20] %>", <%= page.total_clicks -%> ],				
+				<% end -%>		
+				[ "All Other Pages", <%= @other_pages.inject(0) {|tot, page| tot += page.total_clicks } -%>]
+		      ]       
+      }]
+    });
+  });
+</script>
+
+<div id="all_pages_chart" style="height:610px; width:900px; margin:0 auto; clear:both;"></div>

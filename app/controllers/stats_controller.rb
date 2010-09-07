@@ -30,8 +30,13 @@ class StatsController < ApplicationController
     }
     @page_number = params[:dump][:page_number].to_i || 25
     
-    @pages = page_manager.sorted_pages[0, @page_number]
-
+    all_pages = page_manager.sorted_pages
+    
+    @pages = all_pages[0, @page_number]
+    puts "pages from: 0 - count: "+@page_number.to_s
+    @other_pages = all_pages[@page_number-1, (all_pages.size - @page_number -1)]
+    puts "others from: #{@page_number-1} - count: #{all_pages.size - @page_number}"
+    puts "all pages size: #{all_pages.size}"
     respond_to do |format|
       format.html
     end

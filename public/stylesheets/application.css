@@ -39,3 +39,8 @@
 	padding-bottom: 10px;
 	padding-top: 10px;	
 }
+
+.clearfix {
+	height: 20px;
+	clear: both;
+}
